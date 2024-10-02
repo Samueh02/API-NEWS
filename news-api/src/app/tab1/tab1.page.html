@@ -1,17 +1,44 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" mode="ios" class="ion-no-border">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      News App
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+  <ion-header collapse="condense" mode="ios" class="ion-no-border">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title size="large">News App</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-grid>
+    <ion-row>
+      <!-- Iterar sobre el array de artículos -->
+      <ion-col size="12" *ngFor="let article of articles; let i = index">
+        <!-- Crear una tarjeta por cada artículo -->
+        <ion-card>
+          <ion-card-subtitle class="ion-margin">
+            <!-- Mostrar el número del artículo y la fuente -->
+            <span class="text-primary">{{ i+1 }}. </span>
+            <span class="article-source-name">{{article.source.name}}</span>
+          </ion-card-subtitle>
+
+          <!-- Título de la noticia -->
+          <ion-card-title class="ion-padding-horizontal ion-margin-bottom">
+            {{ article.title }}
+          </ion-card-title>
+
+          <!-- Imagen de la noticia si existe -->
+          <ion-img *ngIf="article.urlToImage" [src]="article.urlToImage"></ion-img>
+
+          <!-- Descripción de la noticia si existe -->
+          <ion-card-content *ngIf="article.description">
+            <p>{{ article.description }}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
